@@ -86,10 +86,11 @@ public abstract class MixinRenderFish extends Render<EntityFishHook> {
 				Tessellator tessellator = Tessellator.getInstance();
 				WorldRenderer worldrenderer = tessellator.getWorldRenderer();
 				worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX_NORMAL);
-				worldrenderer.pos(-0.5D, -0.5D, 0.0D).tex(0.0625D, 0.1875D).normal(0.0F, 1.0F, 0.0F).endVertex();
-				worldrenderer.pos(0.5D, -0.5D, 0.0D).tex(0.125D, 0.1875D).normal(0.0F, 1.0F, 0.0F).endVertex();
-				worldrenderer.pos(0.5D, 0.5D, 0.0D).tex(0.125D, 0.125D).normal(0.0F, 1.0F, 0.0F).endVertex();
-				worldrenderer.pos(-0.5D, 0.5D, 0.0D).tex(0.0625D, 0.125D).normal(0.0F, 1.0F, 0.0F).endVertex();
+				final double uvOffset = 1.0 / 512.0;
+				worldrenderer.pos(-0.5D, -0.5D, 0.0D).tex(uvOffset + 0.0625D, 0.1875D).normal(0.0F, 1.0F, 0.0F).endVertex();
+				worldrenderer.pos(0.5D, -0.5D, 0.0D).tex(-uvOffset + 0.125D, 0.1875D).normal(0.0F, 1.0F, 0.0F).endVertex();
+				worldrenderer.pos(0.5D, 0.5D, 0.0D).tex(-uvOffset + 0.125D, 0.125D).normal(0.0F, 1.0F, 0.0F).endVertex();
+				worldrenderer.pos(-0.5D, 0.5D, 0.0D).tex(uvOffset + 0.0625D, 0.125D).normal(0.0F, 1.0F, 0.0F).endVertex();
 				tessellator.draw();
 
 				FishingHelper.getInstance().onRenderBobber(entity);
